@@ -1,0 +1,42 @@
+/*
+ * StepperMotor.c
+ *
+ * Created: 12/10/2022 2:12:54 AM
+ *  Author: Aya Yasser
+ */ 
+#include "StepperMotor.h"
+
+void H_StepperMotor_Init(void)
+{
+	M_DIO_PinMode(STEPPERMOTOR_PIN1,OUTPUT);
+	M_DIO_PinMode(STEPPERMOTOR_PIN2,OUTPUT);
+	M_DIO_PinMode(STEPPERMOTOR_PIN3,OUTPUT);
+	M_DIO_PinMode(STEPPERMOTOR_PIN4,OUTPUT);
+	
+}
+void H_StepperMotor_Start(u16 Local_u16_Step)
+{
+	while(Local_u16_Step!=0)
+	{
+		M_DIO_PinWrite(STEPPERMOTOR_PIN1,HIGH);
+		M_DIO_PinWrite(STEPPERMOTOR_PIN2,LOW);
+		M_DIO_PinWrite(STEPPERMOTOR_PIN3,LOW);
+		M_DIO_PinWrite(STEPPERMOTOR_PIN4,LOW);
+		_delay_ms(5);
+		M_DIO_PinWrite(STEPPERMOTOR_PIN1,LOW);
+		M_DIO_PinWrite(STEPPERMOTOR_PIN2,HIGH);
+		M_DIO_PinWrite(STEPPERMOTOR_PIN3,LOW);
+		M_DIO_PinWrite(STEPPERMOTOR_PIN4,LOW);
+		_delay_ms(5);
+		M_DIO_PinWrite(STEPPERMOTOR_PIN1,LOW);
+		M_DIO_PinWrite(STEPPERMOTOR_PIN2,LOW);
+		M_DIO_PinWrite(STEPPERMOTOR_PIN3,HIGH);
+		M_DIO_PinWrite(STEPPERMOTOR_PIN4,LOW);
+		_delay_ms(5);
+		M_DIO_PinWrite(STEPPERMOTOR_PIN1,LOW);
+		M_DIO_PinWrite(STEPPERMOTOR_PIN2,LOW);
+		M_DIO_PinWrite(STEPPERMOTOR_PIN3,LOW);
+		M_DIO_PinWrite(STEPPERMOTOR_PIN4,HIGH);
+		Local_u16_Step--;
+	}
+}
